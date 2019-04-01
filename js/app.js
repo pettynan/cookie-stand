@@ -9,7 +9,7 @@ function sumArray(sumArr) { // Function that sums an array.
 
   for (var i = 0 ; i < sumArr.length ; i++) {
 
-    total = total + sumArr[i];
+    total += sumArr[i];
   }
   return total;
 }
