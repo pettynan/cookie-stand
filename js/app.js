@@ -1,8 +1,9 @@
 'use strict';
 
-var hoursArray = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', '8pm', 'Total']; // Array that stores each of the time blocks
+// Array to store each of the time blocks.
+var hoursArray = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', '8pm', 'Total'];
 
-function sumArray(sumArr) {
+function sumArray(sumArr) { // Function that sums an array.
 
   var total = 0;
 
@@ -13,7 +14,7 @@ function sumArray(sumArr) {
   return total;
 }
 
-// Object for store 2
+// Object for store 1
 var store1 = {
   storeLocation:'1st and Pike',
   minCustomers_pHour: 23,
@@ -21,10 +22,12 @@ var store1 = {
   avgCookies_pSale: 6.3,
   cookiesArray: [],
 
+  // Function to return a random (non-integer) number between the given min and max customers per hour.
   randomCustomers: function() {
     return (Math.random() * (this.maxCustomers_pHour - this.minCustomers_pHour) + this.minCustomers_pHour);
   },
 
+  // Function that takes the random # of customers from above, multiplies by the avg. cookies per customer and rounds down, then fills an array for the whole day.
   cookiesFunction: function() {
 
     for (var i = 0 ; i < hoursArray.length - 1 ; i++) {
@@ -135,20 +138,14 @@ store3.cookiesFunction();
 store4.cookiesFunction();
 store5.cookiesFunction();
 
-
-
-
-
-// Going to try and create a for loop to actually populate the list on the webpage
-
-
+// These variables are used to reference the id tags on the sales.html document where I want the lists to appear
 var ulEl1 = document.getElementById('store1');
 var ulEl2 = document.getElementById('store2');
 var ulEl3 = document.getElementById('store3');
 var ulEl4 = document.getElementById('store4');
 var ulEl5 = document.getElementById('store5');
 
-
+// This for loop takes the array of hours and each store's array of cookie sales each hour, and inserts them into the sales.html document.
 for (var i = 0 ; i < hoursArray.length ; i++) {
 
   var liEl1 = document.createElement('li');
