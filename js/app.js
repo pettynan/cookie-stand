@@ -1,7 +1,19 @@
 'use strict';
 
-var hoursArray = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', '8pm']; // Array that stores each of the time blocks
+var hoursArray = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', '8pm', 'Total']; // Array that stores each of the time blocks
 
+function sumArray(sumArr) {
+
+  var total = 0;
+
+  for (var i = 0 ; i < sumArr.length ; i++) {
+
+    total = total + sumArr[i];
+  }
+  return total;
+}
+
+// Object for store 2
 var store1 = {
   storeLocation:'1st and Pike',
   minCustomers_pHour: 23,
@@ -15,10 +27,11 @@ var store1 = {
 
   cookiesFunction: function() {
 
-    for (var i = 0 ; i < hoursArray.length ; i++) {
+    for (var i = 0 ; i < hoursArray.length - 1 ; i++) {
       var cookiesThisHour = Math.floor((this.randomCustomers() * this.avgCookies_pSale));
       this.cookiesArray.push(cookiesThisHour);
     }
+    this.cookiesArray.push(sumArray(this.cookiesArray));
     return this.cookiesArray;
   }
 };
@@ -37,10 +50,11 @@ var store2 = {
 
   cookiesFunction: function() {
 
-    for (var i = 0 ; i < hoursArray.length ; i++) {
+    for (var i = 0 ; i < hoursArray.length - 1; i++) {
       var cookiesThisHour = Math.floor((this.randomCustomers() * this.avgCookies_pSale));
       this.cookiesArray.push(cookiesThisHour);
     }
+    this.cookiesArray.push(sumArray(this.cookiesArray));
     return this.cookiesArray;
   }
 };
@@ -59,10 +73,11 @@ var store3 = {
 
   cookiesFunction: function() {
 
-    for (var i = 0 ; i < hoursArray.length ; i++) {
+    for (var i = 0 ; i < hoursArray.length - 1; i++) {
       var cookiesThisHour = Math.floor((this.randomCustomers() * this.avgCookies_pSale));
       this.cookiesArray.push(cookiesThisHour);
     }
+    this.cookiesArray.push(sumArray(this.cookiesArray));
     return this.cookiesArray;
   }
 };
@@ -81,10 +96,11 @@ var store4 = {
 
   cookiesFunction: function() {
 
-    for (var i = 0 ; i < hoursArray.length ; i++) {
+    for (var i = 0 ; i < hoursArray.length - 1; i++) {
       var cookiesThisHour = Math.floor((this.randomCustomers() * this.avgCookies_pSale));
       this.cookiesArray.push(cookiesThisHour);
     }
+    this.cookiesArray.push(sumArray(this.cookiesArray));
     return this.cookiesArray;
   }
 };
@@ -103,10 +119,11 @@ var store5 = {
 
   cookiesFunction: function() {
 
-    for (var i = 0 ; i < hoursArray.length ; i++) {
+    for (var i = 0 ; i < hoursArray.length - 1 ; i++) {
       var cookiesThisHour = Math.floor((this.randomCustomers() * this.avgCookies_pSale));
       this.cookiesArray.push(cookiesThisHour);
     }
+    this.cookiesArray.push(sumArray(this.cookiesArray));
     return this.cookiesArray;
   }
 };
@@ -140,11 +157,11 @@ for (var i = 0 ; i < hoursArray.length ; i++) {
   var liEl4 = document.createElement('li');
   var liEl5 = document.createElement('li');
 
-  liEl1.textContent = hoursArray[i] + ': ' + store1.cookiesArray[i];
-  liEl2.textContent = hoursArray[i] + ': ' + store2.cookiesArray[i];
-  liEl3.textContent = hoursArray[i] + ': ' + store3.cookiesArray[i];
-  liEl4.textContent = hoursArray[i] + ': ' + store4.cookiesArray[i];
-  liEl5.textContent = hoursArray[i] + ': ' + store5.cookiesArray[i];
+  liEl1.textContent = hoursArray[i] + ': ' + store1.cookiesArray[i] + ' cookies';
+  liEl2.textContent = hoursArray[i] + ': ' + store2.cookiesArray[i] + ' cookies';
+  liEl3.textContent = hoursArray[i] + ': ' + store3.cookiesArray[i] + ' cookies';
+  liEl4.textContent = hoursArray[i] + ': ' + store4.cookiesArray[i] + ' cookies';
+  liEl5.textContent = hoursArray[i] + ': ' + store5.cookiesArray[i] + ' cookies';
 
   ulEl1.appendChild(liEl1);
   ulEl2.appendChild(liEl2);
