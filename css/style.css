@@ -6,3 +6,14 @@ h1 {
   background-color: rgb(74,63,35);
   color: rgb(222, 194, 138);
 }
+
+th {
+  text-align: left;
+  background-color: rgb(74,63,35);
+  color:  rgb(222, 194, 138);
+  padding: 5px;
+
+}
+td {
+  background-color: rgb(222, 194, 138);
+}
