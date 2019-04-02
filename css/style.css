@@ -13,7 +13,7 @@ table {
   width: 100%;
 }
 tfoot {
-  border-top: black 5px;
+  border-top: black 50px;
 }
 th {
   text-align: left;
