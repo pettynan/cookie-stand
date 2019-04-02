@@ -6,3 +6,21 @@ h1 {
   background-color: rgb(74,63,35);
   color: rgb(222, 194, 138);
 }
+h2 {
+  color: rgb(74,63,35);
+}
+table {
+  width: 100%;
+}
+tfoot {
+  border-top: black 50px;
+}
+th {
+  text-align: left;
+  background-color: rgb(74,63,35);
+  color:  rgb(222, 194, 138);
+  padding: 5px;
+}
+td {
+  background-color: rgb(222, 194, 138);
+}
