@@ -1,7 +1,7 @@
 'use strict';
 
 // Array to store each of the time blocks.
-var hoursArray = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', '8pm', 'Total'];
+var hoursArray = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', '8pm', 'Daily Total'];
 
 // Array to store all of the store objects.
 var allStores = [];
@@ -37,7 +37,7 @@ function Store (storeId, storeLocation, minCustomers_pHour, maxCustomers_pHour, 
 }
 
 
-// These 5 statements ( :( ) initialize the 5 store objects, and add them each to the allStores array.
+// These 5 statements ( :( ) name and initialize the 5 store objects, and add each one to the allStores array.
 var store0 = new Store ('store0', '1st and Pike', 23, 65, 6.3);
 var store1 = new Store ('store1', 'SeaTac Airport', 3, 24, 1.2);
 var store2 = new Store ('store2', 'Seattle Center', 11, 38, 3.7);
@@ -54,19 +54,16 @@ Store.prototype.render = function() {
   thEl.textContent = this.storeLocation +':';
   trEl.appendChild(thEl);
 
-  // This loop fills the row with amount of cookies sold each hour, and the Daily Total in the last element.
+  // This loop fills the row with amount of cookies sold each hour, with the Daily Total in the final element.
   for (var i = 0 ; i < hoursArray.length ; i++) {
 
     var tdEl = document.createElement('td');
     tdEl.textContent = this.cookiesArray[i];
-
     trEl.appendChild(tdEl);
   }
-  // This line adds the finished row to the bottom of the table.
-  document.getElementById('stores').appendChild(trEl);
+
+  document.getElementById('stores').appendChild(trEl); // This line adds the finished row to the bottom of the table.
 };
-
-
 
 // This function creates the heading of the table.
 function tableHeading() {
