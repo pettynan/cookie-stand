@@ -195,40 +195,57 @@ allStores[4].cookiesFunction();
 
 
 // This function will render the store object it's contained within as a row in a table.
-Store.prototype.render = function() { 
+Store.prototype.render = function() {
 
+  var trEl = document.createElement('tr');
 
-
-
-}
-
-
-
-
-
-
-// MAKE BELOW INTO RENDER FUNCTION
-
-function render(storeId) {
-  var ulEl = document.getElementById(storeId);
 
   for (var i = 0 ; i < hoursArray.length ; i++) {
 
-    var liEl = document.createElement('li');
 
-    liEl.textContent = `${hoursArray[i]}: ${storeId.cookiesArray[i]} cookies`;
+    var tdEl = document.createElement('td');
+    tdEl.textContent = this.cookiesArray[i];
 
-    ulEl.appendChild(liEl);
+    trEl.appendChild(tdEl);
+
 
   }
 
-}
+  document.getElementById('stores').appendChild(trEl);
+};
 
-for (i = 0 ; i < storeIdArray.length ; i++) {
+allStores[0].render();
+allStores[1].render();
+allStores[2].render();
+allStores[3].render();
+allStores[4].render();
 
-  render(allStores[i]);
 
-}
+
+
+
+// // MAKE BELOW INTO RENDER FUNCTION
+
+// function render(storeId) {
+//   var ulEl = document.getElementById(storeId);
+
+//   for (var i = 0 ; i < hoursArray.length ; i++) {
+
+//     var liEl = document.createElement('li');
+
+//     liEl.textContent = `${hoursArray[i]}: ${storeId.cookiesArray[i]} cookies`;
+
+//     ulEl.appendChild(liEl);
+
+//   }
+
+// }
+
+// for (i = 0 ; i < storeIdArray.length ; i++) {
+
+//   render(allStores[i]);
+
+// }
 
 console.table(allStores);
 
