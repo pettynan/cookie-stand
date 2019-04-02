@@ -3,7 +3,7 @@
 // Array to store each of the time blocks.
 var hoursArray = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', '8pm', 'Total'];
 
-// This array will contain all of the store objects.
+// Array to store all of the store objects.
 var allStores = [];
 
 // This is the constructor function that makes each of the store objects.
@@ -44,52 +44,62 @@ var store2 = new Store ('store2', 'Seattle Center', 11, 38, 3.7);
 var store3 = new Store ('store3', 'Capitol Hill', 20, 38, 2.3);
 var store4 = new Store ('store4', 'Alki', 2, 16, 4.6);
 
-
-allStores[0].cookiesFunction();
-allStores[1].cookiesFunction();
-allStores[2].cookiesFunction();
-allStores[3].cookiesFunction();
-allStores[4].cookiesFunction();
-
-
-
 // This function will render the store object it's contained within as a row in a table.
 Store.prototype.render = function() {
 
   var trEl = document.createElement('tr');
 
+  // This code creates the heading of the row: the store location.
+  var thEl = document.createElement('th');
+  thEl.textContent = this.storeLocation +':';
+  trEl.appendChild(thEl);
 
+  // This loop fills the row with amount of cookies sold each hour, and the Daily Total in the last element.
   for (var i = 0 ; i < hoursArray.length ; i++) {
-
 
     var tdEl = document.createElement('td');
     tdEl.textContent = this.cookiesArray[i];
 
     trEl.appendChild(tdEl);
+  }
+  // This line adds the finished row to the bottom of the table.
+  document.getElementById('stores').appendChild(trEl);
+};
 
+
+
+// This function creates the heading of the table.
+function tableHeading() {
+
+  var trEl = document.createElement('tr');
+
+  var thEl = document.createElement('th');
+
+  trEl.appendChild(thEl);
+
+  for (var i = 0 ; i < hoursArray.length ; i++) {
+    thEl = document.createElement('th');
+    thEl.textContent = hoursArray[i];
+    trEl.appendChild(thEl);
 
   }
 
   document.getElementById('stores').appendChild(trEl);
-};
-
-allStores[0].render();
-allStores[1].render();
-allStores[2].render();
-allStores[3].render();
-allStores[4].render();
+}
 
 
+// This line runs function to create the heading row.
+tableHeading();
 
-
+// This for loop runs the functions to calculate the amount of cookies sold per hour for a store then renders that data in a row on the table, for each store.
+for (var i = 0 ; i < allStores.length ; i++) {
+  allStores[i].cookiesFunction();
+  allStores[i].render();
+}
 
 console.table(allStores);
-
-
 console.log(store0);
 console.log(store1);
 console.log(store2);
 console.log(store3);
 console.log(store4);
-
-
