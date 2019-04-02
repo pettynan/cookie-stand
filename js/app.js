@@ -3,6 +3,9 @@
 // Array to store each of the time blocks.
 var hoursArray = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', '8pm', 'Daily Total'];
 
+// Array to store the total cookies sold across all stores each hour. I'm not happy with how this is done currently, but it is functional.
+var totalPerHour = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+
 // Array to store all of the store objects.
 var allStores = [];
 
@@ -27,6 +30,8 @@ function Store (storeId, storeLocation, minCustomers_pHour, maxCustomers_pHour, 
       var cookiesThisHour = Math.floor((this.randomCustomers() * this.avgCookies_pSale));
       this.cookiesArray.push(cookiesThisHour);
       total += cookiesThisHour;
+      totalPerHour[i] += cookiesThisHour;
+      totalPerHour[15] += cookiesThisHour;
     }
     this.cookiesArray.push(total);
     return this.cookiesArray;
@@ -67,26 +72,38 @@ Store.prototype.render = function() {
 
 // This function creates the heading of the table.
 function tableHeading() {
-
+  var theadEl = document.createElement('thead');
   var trEl = document.createElement('tr');
-
   var thEl = document.createElement('th');
-
   trEl.appendChild(thEl);
 
   for (var i = 0 ; i < hoursArray.length ; i++) {
     thEl = document.createElement('th');
     thEl.textContent = hoursArray[i];
     trEl.appendChild(thEl);
-
   }
-
+  theadEl.appendChild(trEl);
   document.getElementById('stores').appendChild(trEl);
 }
 
+// This function creates the footing of the table.
+function tableFooting() {
+  var tfootEl = document.createElement('tfoot');
+  var trEl = document.createElement('tr');
+  var thEl = document.createElement('th');
+  thEl.textContent = 'All Stores:';
+  trEl.appendChild(thEl);
 
-// This line runs function to create the heading row.
-tableHeading();
+  for (var i = 0 ; i < hoursArray.length ; i++) {
+    var tdEl = document.createElement('td');
+    tdEl.textContent = totalPerHour[i];
+    trEl.appendChild(tdEl);
+  }
+  tfootEl.appendChild(trEl);
+  document.getElementById('stores').appendChild(tfootEl);
+}
+
+tableHeading(); // This line runs function to create the heading row.
 
 // This for loop runs the functions to calculate the amount of cookies sold per hour for a store then renders that data in a row on the table, for each store.
 for (var i = 0 ; i < allStores.length ; i++) {
@@ -94,9 +111,11 @@ for (var i = 0 ; i < allStores.length ; i++) {
   allStores[i].render();
 }
 
-console.table(allStores);
-console.log(store0);
-console.log(store1);
-console.log(store2);
-console.log(store3);
-console.log(store4);
+tableFooting(); // This line runs function to create the footing row.
+
+
+store0; // I wanted to name each object, these lines make my linter shut up about how I'm not using those names anywhere yet.
+store1;
+store2;
+store3;
+store4;
