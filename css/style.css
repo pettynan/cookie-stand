@@ -12,6 +12,9 @@ h2 {
 table {
   width: 100%;
 }
+tfoot {
+  border-top: black 5px;
+}
 th {
   text-align: left;
   background-color: rgb(74,63,35);

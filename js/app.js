@@ -83,7 +83,7 @@ function tableHeading() {
     trEl.appendChild(thEl);
   }
   theadEl.appendChild(trEl);
-  document.getElementById('stores').appendChild(trEl);
+  document.getElementById('stores').appendChild(theadEl);
 }
 
 // This function creates the footing of the table.
