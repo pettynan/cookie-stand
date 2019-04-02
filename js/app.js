@@ -3,6 +3,17 @@
 // Array to store each of the time blocks.
 var hoursArray = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', '8pm', 'Total'];
 
+
+// var storeNameArray = ['store1', 'store2', 'store3', 'store4', 'store5'];
+// var storeLocationArray = ['1st and Pike', 'SeaTac Airport', 'Seattle Center', 'Capitol Hill', 'Alki'];
+// var minCustomers_pHourArray = [23, 3, 11, 20, 2];
+// var maxCustomers_pHourArray = [65, 24, 38, 38, 16];
+// var avgCookies_pSaleArray = [6.3, 1.2, 3.7, 2.3, 4.6];
+
+
+
+
+
 function sumArray(sumArr) { // Function that sums an array.
 
   var total = 0;
@@ -147,6 +158,9 @@ var ulEl5 = document.getElementById('store5');
 
 // This for loop takes the array of hours and each store's array of cookie sales each hour, and inserts them into the sales.html document.
 for (var i = 0 ; i < hoursArray.length ; i++) {
+
+  // I WANT to create another for loop inside this for loop to run the same process 5 times (where 5 is the number of stores)
+
 
   var liEl1 = document.createElement('li');
   var liEl2 = document.createElement('li');
