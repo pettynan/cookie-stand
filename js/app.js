@@ -27,15 +27,15 @@ Store.prototype.randomCustomers = function() {
 
 // Function that takes the random # of customers from above, multiplies by the avg. cookies per customer and rounds down, then fills an array for the whole day.
 Store.prototype.cookiesFunction = function() {
-  var total = 0;
+  var locationTotal = 0;
   for (var i = 0 ; i < hoursArray.length - 1 ; i++) {
     var cookiesThisHour = Math.floor((this.randomCustomers() * this.avgCookies_pSale));
     this.cookiesArray.push(cookiesThisHour);
-    total += cookiesThisHour;
+    locationTotal += cookiesThisHour;
     totalPerHour[i] += cookiesThisHour;
     totalPerHour[15] += cookiesThisHour;
   }
-  this.cookiesArray.push(total);
+  this.cookiesArray.push(locationTotal);
   return this.cookiesArray;
 };
 
@@ -60,6 +60,28 @@ var store1 = new Store ('store1', 'SeaTac Airport', 3, 24, 1.2);
 var store2 = new Store ('store2', 'Seattle Center', 11, 38, 3.7);
 var store3 = new Store ('store3', 'Capitol Hill', 20, 38, 2.3);
 var store4 = new Store ('store4', 'Alki', 2, 16, 4.6);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 // This function creates the heading of the table.
@@ -95,17 +117,24 @@ function tableFooting() {
   document.getElementById('stores').appendChild(tfootEl);
 }
 
-// This line runs function to create the heading row.
-tableHeading();
-
-// This for loop runs the functions to calculate the amount of cookies sold per hour for a store then renders that data in a row on the table, for each store.
+/// This for loop runs the functions to calculate the amount of cookies sold per hour for a store
 for (var i = 0 ; i < allStores.length ; i++) {
   allStores[i].cookiesFunction();
-  allStores[i].render();
 }
 
-// This line runs function to create the footing row.
-tableFooting();
+
+// This function renders a row on the table for each store.
+function renderTable() {
+  tableHeading();
+  for (var i = 0 ; i < allStores.length ; i++) {
+    allStores[i].render();
+  }
+  tableFooting();
+}
+
+
+// This line runs the functions to render the entire table.
+renderTable();
 
 
 store0; // I wanted to name each object, these lines make my linter shut up about how I'm not using those names anywhere yet.
