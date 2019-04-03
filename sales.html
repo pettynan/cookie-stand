@@ -2,17 +2,41 @@
   <html>
     <head>
       <title>Pat's Salmon Cookies SALES</title>
-   
+      
       <link href="./css/style.css" type="text/css" rel="stylesheet">
     </head>
     <body>
       
-
       <h2>Estimations of Hourly Cookie Purchases, by Location</h2>
       <table id="stores">
-
       </table>
-     
+      </br>
+      <form id="newStore">
+        <fieldset>
+          <legend>+ Add New Store...</legend>
+
+          <label for="storeLocation">Store Location:</label>
+          <input name="storeLocation" type="text" placeholder="Store Location..." required />
+          <br>
+          <label for="minCustomers_pHour">Min Customers per Hour:</label>
+          <input name="minCustomers_pHour" type="number" placeholder="0" required />
+          <br>
+          <label for="maxCustomers_pHour">Max Customers per Hour:</label>
+          <input name="maxCustomers_pHour" type="number" placeholder="0" required />
+          <br>
+          <label for="avgCookies_pSale">Average Cookies per Sale:</label>
+          <input name="avgCookies_pSale" type="number" placeholder="0" required />
+          <br>
+          <button id="new-store">Add New Store</button>
+
+
+
+        </fieldset>
+      </form>
+
+
+
+      
       <script src="./js/app.js"></script>
     </body>
   </html>
