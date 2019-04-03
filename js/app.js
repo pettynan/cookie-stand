@@ -1,17 +1,16 @@
 'use strict';
 
+// These variables are DOM Acess Variables.
 var storesTable = document.getElementById('storesTable');
 var newStoreForm = document.getElementById('newStoreForm');
 
-
-
-// Array to store each of the time blocks.
+// This array stores each of the time blocks.
 var hoursArray = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', '8pm', 'Daily Total'];
 
-// Array to store the total cookies sold across all stores each hour. I'm not happy with how this is done currently, but it is functional. I think I could do this using an if statement inside of the cookiesFunction instead, but I'm going to wait to do that.
+// This array stores the total cookies sold across all stores each hour. I'm not happy with how this is done currently, but it is functional. I think I could do this using an if statement inside of the cookiesFunction instead, but I'm going to wait to do that.
 var totalPerHour = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
-// Array to store all of the store objects.
+// This array stores all of the store objects.
 var allStores = [];
 
 // This is the constructor function that makes each of the store objects.
@@ -23,15 +22,16 @@ function Store (storeId, storeLocation, minCustomers_pHour, maxCustomers_pHour, 
   this.maxCustomers_pHour = maxCustomers_pHour;
   this.avgCookies_pSale = avgCookies_pSale;
   this.cookiesArray = [];
+  this.cookiesFunction();
   allStores.push(this); // Adds newly iterated store object to the array containing all store objects.
 }
 
-// Function to return a random (non-integer) number between the given min and max customers per hour.
+// This function returns  a random (non-integer) number between the given min and max customers per hour.
 Store.prototype.randomCustomers = function() {
   return (Math.round(Math.random() * (this.maxCustomers_pHour - this.minCustomers_pHour) + this.minCustomers_pHour));
 };
 
-// Function that takes the random # of customers from above, multiplies by the avg. cookies per customer and rounds down, then fills an array for the whole day.
+// This function takes the random # of customers from above, multiplies by the avg. cookies per customer and rounds down, then fills an array for the whole day.
 Store.prototype.cookiesFunction = function() {
   var locationTotal = 0;
   for (var i = 0 ; i < hoursArray.length - 1 ; i++) {
@@ -42,7 +42,6 @@ Store.prototype.cookiesFunction = function() {
     totalPerHour[15] += cookiesThisHour;
   }
   this.cookiesArray.push(locationTotal);
-  return this.cookiesArray;
 };
 
 // This function will render its store object as a row in a table.
@@ -68,7 +67,7 @@ new Store ('store3', 'Capitol Hill', 20, 38, 2.3);
 new Store ('store4', 'Alki', 2, 16, 4.6);
 
 
-// This function is the event handler for the submission of a new store
+// This function is the event handler for the submission of a new store.
 function handleNewStoreSubmit(event) {
   event.preventDefault();
 
@@ -78,27 +77,26 @@ function handleNewStoreSubmit(event) {
   var maxCustomers_pHour = event.target.maxCustomers_pHour.value;
   var avgCookies_pSale = event.target.avgCookies_pSale.value;
 
+  // This conditional ensures that only nonnegative values are entered for min, max, and avg.
   if (minCustomers_pHour < 0 || maxCustomers_pHour < 0 || avgCookies_pSale < 0) {
     alert('Please enter non-negative values for all fields!');
 
   } else {
+    event.target.storeLocation.value = null; // Clears New Store form on webpage.
+    event.target.minCustomers_pHour.value = null;
+    event.target.maxCustomers_pHour.value = null;
+    event.target.avgCookies_pSale.value = null;
 
+    // This line creates an object for the new store.
+    new Store(storeId, storeLocation, minCustomers_pHour, maxCustomers_pHour, avgCookies_pSale);
 
-    var newStore = new Store(storeId, storeLocation, minCustomers_pHour, maxCustomers_pHour, avgCookies_pSale);
-
-    newStore.cookiesFunction();
-
-    storesTable.innerHTML = '';
-    renderTable();
+    storesTable.innerHTML = ''; // This line clears the old table.
+    renderTable(); // This line rerenders the table.
   }
 }
 
-
+// This function is the event listener for Add New Store... form.
 newStoreForm.addEventListener('submit', handleNewStoreSubmit);
-
-
-
-
 
 // This function creates the heading of the table.
 function tableHeading() {
@@ -133,14 +131,6 @@ function tableFooting() {
   storesTable.appendChild(tfootEl);
 }
 
-
-
-/// This for loop runs the functions to calculate the amount of cookies sold per hour for a store
-for (var i = 0 ; i < allStores.length ; i++) {
-  allStores[i].cookiesFunction();
-}
-
-
 // This function renders the heading, renders a row on the table for each store, and renders the footing.
 function renderTable() {
   tableHeading();
@@ -151,5 +141,5 @@ function renderTable() {
 }
 
 
-// This line runs the functions to render the entire table.
+// This line renders the entire table when the page is first loaded.
 renderTable();
