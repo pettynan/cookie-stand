@@ -72,23 +72,25 @@ new Store ('store4', 'Alki', 2, 16, 4.6);
 function handleNewStoreSubmit(event) {
   event.preventDefault();
 
-  
-
   var storeId = 'store' + allStores.length;
   var storeLocation = event.target.storeLocation.value;
   var minCustomers_pHour = event.target.minCustomers_pHour.value;
   var maxCustomers_pHour = event.target.maxCustomers_pHour.value;
   var avgCookies_pSale = event.target.avgCookies_pSale.value;
 
+  if (minCustomers_pHour < 0 || maxCustomers_pHour < 0 || avgCookies_pSale < 0) {
+    alert('Please enter non-negative values for all fields!');
 
-  var newStore = new Store(storeId, storeLocation, minCustomers_pHour, maxCustomers_pHour, avgCookies_pSale);
+  } else {
 
 
-  newStore.cookiesFunction();
+    var newStore = new Store(storeId, storeLocation, minCustomers_pHour, maxCustomers_pHour, avgCookies_pSale);
 
-  storesTable.innerHTML = '';
-  renderTable();
+    newStore.cookiesFunction();
 
+    storesTable.innerHTML = '';
+    renderTable();
+  }
 }
 
 
