@@ -1,5 +1,10 @@
 'use strict';
 
+var storesTable = document.getElementById('storesTable');
+var newStoreForm = document.getElementById('newStoreForm');
+
+
+
 // Array to store each of the time blocks.
 var hoursArray = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', '8pm', 'Daily Total'];
 
@@ -11,6 +16,7 @@ var allStores = [];
 
 // This is the constructor function that makes each of the store objects.
 function Store (storeId, storeLocation, minCustomers_pHour, maxCustomers_pHour, avgCookies_pSale) {
+
   this.storeId = storeId;
   this.storeLocation = storeLocation;
   this.minCustomers_pHour = minCustomers_pHour;
@@ -22,7 +28,7 @@ function Store (storeId, storeLocation, minCustomers_pHour, maxCustomers_pHour, 
 
 // Function to return a random (non-integer) number between the given min and max customers per hour.
 Store.prototype.randomCustomers = function() {
-  return (Math.random() * (this.maxCustomers_pHour - this.minCustomers_pHour) + this.minCustomers_pHour);
+  return (Math.round(Math.random() * (this.maxCustomers_pHour - this.minCustomers_pHour) + this.minCustomers_pHour));
 };
 
 // Function that takes the random # of customers from above, multiplies by the avg. cookies per customer and rounds down, then fills an array for the whole day.
@@ -51,34 +57,42 @@ Store.prototype.render = function() {
     tdEl.textContent = this.cookiesArray[i];
     trEl.appendChild(tdEl);
   }
-  document.getElementById('stores').appendChild(trEl); // This line adds the finished row to the bottom of the table.
+  storesTable.appendChild(trEl); // This line adds the finished row to the bottom of the table.
 };
 
 // These 5 statements ( :( ) name and initialize the 5 store objects, and add each one to the allStores array.
-var store0 = new Store ('store0', '1st and Pike', 23, 65, 6.3);
-var store1 = new Store ('store1', 'SeaTac Airport', 3, 24, 1.2);
-var store2 = new Store ('store2', 'Seattle Center', 11, 38, 3.7);
-var store3 = new Store ('store3', 'Capitol Hill', 20, 38, 2.3);
-var store4 = new Store ('store4', 'Alki', 2, 16, 4.6);
+new Store ('store0', '1st and Pike', 23, 65, 6.3);
+new Store ('store1', 'SeaTac Airport', 3, 24, 1.2);
+new Store ('store2', 'Seattle Center', 11, 38, 3.7);
+new Store ('store3', 'Capitol Hill', 20, 38, 2.3);
+new Store ('store4', 'Alki', 2, 16, 4.6);
 
 
+// This function is the event handler for the submission of a new store
+function handleNewStoreSubmit(event) {
+  event.preventDefault();
+
+  
+
+  var storeId = 'store' + allStores.length;
+  var storeLocation = event.target.storeLocation.value;
+  var minCustomers_pHour = event.target.minCustomers_pHour.value;
+  var maxCustomers_pHour = event.target.maxCustomers_pHour.value;
+  var avgCookies_pSale = event.target.avgCookies_pSale.value;
 
 
+  var newStore = new Store(storeId, storeLocation, minCustomers_pHour, maxCustomers_pHour, avgCookies_pSale);
 
 
+  newStore.cookiesFunction();
+
+  storesTable.innerHTML = '';
+  renderTable();
+
+}
 
 
-
-
-
-
-
-
-
-
-
-
-
+newStoreForm.addEventListener('submit', handleNewStoreSubmit);
 
 
 
@@ -97,7 +111,7 @@ function tableHeading() {
     trEl.appendChild(thEl);
   }
   theadEl.appendChild(trEl);
-  document.getElementById('stores').appendChild(theadEl);
+  storesTable.appendChild(theadEl);
 }
 
 // This function creates the footing of the table.
@@ -114,8 +128,10 @@ function tableFooting() {
     trEl.appendChild(tdEl);
   }
   tfootEl.appendChild(trEl);
-  document.getElementById('stores').appendChild(tfootEl);
+  storesTable.appendChild(tfootEl);
 }
+
+
 
 /// This for loop runs the functions to calculate the amount of cookies sold per hour for a store
 for (var i = 0 ; i < allStores.length ; i++) {
@@ -123,7 +139,7 @@ for (var i = 0 ; i < allStores.length ; i++) {
 }
 
 
-// This function renders a row on the table for each store.
+// This function renders the heading, renders a row on the table for each store, and renders the footing.
 function renderTable() {
   tableHeading();
   for (var i = 0 ; i < allStores.length ; i++) {
@@ -135,10 +151,3 @@ function renderTable() {
 
 // This line runs the functions to render the entire table.
 renderTable();
-
-
-store0; // I wanted to name each object, these lines make my linter shut up about how I'm not using those names anywhere yet.
-store1;
-store2;
-store3;
-store4;
