@@ -5,12 +5,17 @@ body {
 h1 {
   background-color: rgb(74,63,35);
   color: rgb(222, 194, 138);
+  font-size: 3em;
+  padding-top:10px;
+  padding-bottom: 10px
 }
 h2 {
   color: rgb(74,63,35);
 }
 table {
   width: 100%;
+  border-spacing: 3px;
+  border-collapse: separate;
 }
 tfoot {
   border-top: black 50px;
