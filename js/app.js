@@ -81,6 +81,9 @@ function handleNewStoreSubmit(event) {
   if (minCustomers_pHour < 0 || maxCustomers_pHour < 0 || avgCookies_pSale < 0) {
     alert('Please enter non-negative values for all fields!');
 
+  } else if (minCustomers_pHour > maxCustomers_pHour) {
+    alert('Max. customers should be greater than min. customers!');
+
   } else {
     event.target.storeLocation.value = null; // Clears New Store form on webpage.
     event.target.minCustomers_pHour.value = null;
